@@ -1,0 +1,101 @@
+//--CALL--
+//template assembly for the call <name> <args> command
+
+//Make space for the new args on the stack, saving where they are to use later
+//Save the current position on the stack
+@SP
+HLMLOAD
+AB=HL
+
+@TEMP
+M=A
+HLINC
+M=B
+
+//make space on the stack
+@SP1
+A={--ARGS--}
+M=M+A
+
+//check overflow
+OVERA
+@NO_OVERFLOW
+JEQ
+@SP
+M=M+1
+(NO_OVERFLOW)
+
+//push our return flag label onto the stack
+@RETURN_FLAG
+AB=HL
+
+@SP
+HLMLOAD
+M=A
+HLINC
+M=B
+HLINC
+
+//Save current position
+AB=HL
+@SP
+M=A
+HLINC
+M=B
+
+//Push our current local, arg, this, and that onto the directory
+//Since these values are close together, it makes a lot more sense just to loop them
+@LCL
+AB=HL
+
+@TEMP2
+M=B //spot for LCL in TEMP2
+
+(PUSH_LOOP)
+//put whatever is currently meant to be put on the stack onto the stack
+@TEMP2
+LZ=M
+HLMLOAD //get from what we want
+AB=HL
+
+@SP // put on stack
+HLMLOAD
+M=A
+HLINC
+M=B
+HLINC
+
+//Update stack pointer
+AB=HL
+@SP
+M=A
+HLINC
+M=B
+
+//Check loop condition
+@TEMP2
+A=2
+M=M+A
+
+//if TEMP2 = 10, stop loop
+A=10
+A=A-M
+@PUSH_LOOP
+JNE
+
+//set the new args to where it is in the stack
+@TEMP
+HLMLOAD
+AB=HL
+
+@ARG
+M=A
+HLINC
+M=B
+
+//Go to function label
+@{--FUNCTION LABEL--}
+JMP
+
+//Return label
+(RETURN_FLAG)

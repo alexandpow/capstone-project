@@ -1,0 +1,24 @@
+//--FUNCTION--
+//template assembly for function <name> <locals> command
+{--FUNCTION LABEL--}
+//set local to current stack pointer and increment the stack pointer by the amount of locals wanted
+@SP
+HLMLOAD
+AB=HL
+
+@LCL
+M=A
+HLINC
+M=B
+
+@SP1
+A={--LOCALS--}
+M=A+M
+
+OVERA
+@NO_OVERFLOW
+JEQ
+@SP
+M=M+1
+(NO_OVERFLOW)
+

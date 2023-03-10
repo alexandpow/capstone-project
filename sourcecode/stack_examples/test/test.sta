@@ -1,0 +1,10 @@
+call main 1
+
+function return5 0
+push constant 5
+pop arg 0
+return
+
+function main 0
+call return5 1
+pop temp 5

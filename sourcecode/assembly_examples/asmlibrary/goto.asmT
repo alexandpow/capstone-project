@@ -1,0 +1,4 @@
+//--GOTO--
+//Template assembly for the goto vm command
+@{--LABEL--}
+JMP

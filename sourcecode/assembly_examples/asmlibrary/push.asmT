@@ -1,0 +1,54 @@
+//--PUSH--
+//Template assembly program for pushing a value from memory page->stack
+//For the purposes of explanation to a reader, lets assume the vm command "push local 5"
+
+
+#IF {NOTCONSTANT}
+//Only use this block if this isnt a constant being pushed onto stack
+//First, lets go to where the pointer is 
+@{--PAGE--} //@LCL THIS @ TEMPLATED FOR DIFFERENT MEMORY SEGMENTS
+HLMLOAD //Load local pointer into temp space for modification
+AB=HL
+@TEMP1
+M=A
+@TEMP2
+M=B
+
+//setup pointer to the point in memory requested (local 4)
+@TEMP2
+B={--OFFSET--}  //5 THIS VALUE TEMPLATED FOR DIFFERENT ADDR
+M=B+M
+
+//See if overflow
+OVERA
+@PASTOVERFLOW
+JEQ  //A will be = 0 if no overflow happened
+
+//If we are here, overflow happened, we know it can only be an overflow, so we add 1 onto our temp H register
+@TEMP1
+M=M+1
+(PASTOVERFLOW)
+
+//Finally, lets get our value now 
+B=M
+
+#ELSE
+//block only used if constant being pushed onto stack
+B={--CONSTANT--}
+
+#ENDIF
+
+//Now with our value, lets put it on the stack
+@SP
+HLMLOAD
+M=B
+
+//Finally, go back to update the stack pointer
+@SP
+HLMLOAD
+HLINC
+AB=HL
+@SP
+M=A
+@SP1
+M=B

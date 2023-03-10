@@ -1,0 +1,27 @@
+//--IF-GOTO--
+//Template assembly for the if-goto vm command
+//Pop the value off the stack
+@SP
+HLMLOAD
+HLDEC
+A=M
+
+//Store for later
+@TEMP
+M=A
+
+//update stack pointer
+@SP
+HLMLOAD
+HLDEC
+AB=HL
+@SP
+M=A
+@SP1
+M=B
+
+//set it to A
+@TEMP
+A=M
+@{--LABEL--}
+JEQ
