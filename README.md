@@ -1,6 +1,17 @@
 # Capstone Project
-Capstone project created to fufill degree requirements
+This is a capstone project created to fufill degree requirements in the spring semester of 2022. All of the java source code can be found in /source/src/bunny/.
 
+The chosen purpose of the project was to create a virtual machine for a system of my own design, and attempt to have that system run commands in an assembly-like language.
+
+An end goal for this project was to work all the way up to a high-level language implementation, but I was not able to implement that in time.
+
+This project is uploaded as-is with no guarantee that it will run correctly or compile, it would need a lot of tweaking.
+
+Below is a copy of the paper submitted along with the project in plaintext.
+
+## Capstone Paper
+<details>
+<summary>Click to show/hide</summary>
 Over the past semester, I have worked independently on a programming project. This was a virtual machine that would run machine code, and programs that would translate higher level code to machine code to be run in the virtual machine. The purpose of this project was to serve as a compilation of everything I have learned in my academic studies and explore a certain area of computer science.
 
 The original inspiration for my capstone project came from the main assignment in my Logic Design course, where we utilized the textbook The Elements of Computing Systems: Building a Modern Computer from First Principles. The textbook was an explanation of computer system design from the hardware level to high-level programming, along with how each layer supports the next. Following the text, we programmed a virtual computer machine using outlined designs and algorithms. I became fascinated with the idea of simulating a computer interpreting machine code and how the instruction sets are designed. Something that we did not spend a lot of time on in class were the higher-level applications of the assembly code. I also wanted to expand the scope to include a stack language that would allow for functions and further high level concepts to be performed using the virtual machine. 
@@ -39,3 +50,4 @@ While I did use Java for what I believed to be easier use, a functionality I did
 One last thing I would re-evaluate if I had more time would be my design of the virtual CPU and assembly language. When I expanded the instruction set to any possible 8 bits, there were an excess of commands that would either do the same thing as another, or nothing. After programming in the assembly for the CPU, I believe there are a number of new functionalities that should be there for ease of use. A more proper way to go about this would be to model the virtual CPU itself to make sure that all the instructions are possible to perform with circuit logic. This would be going down to intricacies that I initially cut out of my scope, but it would be a required step in order to keep some kind of authenticity to my simulated virtual machine.
 
 I am very satisfied with what I have managed to finish within the semester. Since the programming algorithms for translating the code from a stack language, to assembly, and then to machine code were things I already did in an earlier class, I used the opportunity this semester to go into it with a unique specification that brought its own challenges and perspective on creating this kind of simulation.
+</details>
